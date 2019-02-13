@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HannoverRaveWebApp", "Hanno
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{A84D2B4B-6BF6-49A5-994E-4B5C5CCCF065}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Models", "Shared.Models\Shared.Models.csproj", "{69AB7374-B2BE-4E2B-8CE6-03D9B39FE494}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{A84D2B4B-6BF6-49A5-994E-4B5C5CCCF065}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A84D2B4B-6BF6-49A5-994E-4B5C5CCCF065}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A84D2B4B-6BF6-49A5-994E-4B5C5CCCF065}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69AB7374-B2BE-4E2B-8CE6-03D9B39FE494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69AB7374-B2BE-4E2B-8CE6-03D9B39FE494}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69AB7374-B2BE-4E2B-8CE6-03D9B39FE494}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69AB7374-B2BE-4E2B-8CE6-03D9B39FE494}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
