@@ -15,5 +15,16 @@ namespace Shared.Models
         public EventType EventType { get; set; }
         public List<EventDJ> EventDJs { get; set; }
         //TODO: Logo or a video
+
+        public Event()
+        {
+
+        }
+
+        public Event(string name, EventType eventType)
+        {
+            Name = name;
+            EventType = EventType;
+        }
     }
 }

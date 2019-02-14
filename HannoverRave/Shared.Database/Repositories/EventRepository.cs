@@ -19,6 +19,11 @@ namespace Shared.Database.Repositories
             context.Events.Remove(GetById(id));
         }
 
+        public IEnumerable<Event> FindEvent(string eventName)
+        {
+            return context.Events.Where(n => n.Name.StartsWith(eventName, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
         public IEnumerable<Event> GetActiveEvents(int count)
         {
             return context.Events.Where(d => d.EndDate != DateTime.Now).Take(count).ToList();

@@ -7,6 +7,7 @@ namespace Shared.Database.Interfaces
     public interface IEventRepository : IDisposable 
     {
         Event GetById(int id);
+        IEnumerable<Event> FindEvent(string eventName);
         IEnumerable<Event> GetActiveEvents(int count);
         IEnumerable<Event> GetEvents();
         void Insert(Event @event);
