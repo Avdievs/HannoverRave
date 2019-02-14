@@ -1,15 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using MySql.Data.MySqlClient;
 using Shared.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace Shared.Database
 {
     public class RaveContext : DbContext
     {
+        public static readonly LoggerFactory DBLoggerFactory = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
+
         public DbSet<Event> Events { get; set; }
         public DbSet<DJ> DJs { get; set; }
         public DbSet<Club> Clubs { get; set; }
@@ -21,8 +23,13 @@ namespace Shared.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(ConnectionString);
-            
+            optionsBuilder.UseLoggerFactory(DBLoggerFactory);
+
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySQL(ConnectionString);
+            }
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -62,6 +69,7 @@ namespace Shared.Database
             });
         }
 
+        //TODO: Connection test
         public bool ConnectionTest()
         {
             MySqlConnection conn = null;
