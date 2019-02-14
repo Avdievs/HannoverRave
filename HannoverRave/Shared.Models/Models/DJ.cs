@@ -1,4 +1,6 @@
-﻿namespace Shared.Models
+﻿using System.Collections.Generic;
+
+namespace Shared.Models
 {
     public class DJ
     {
@@ -7,5 +9,6 @@
         public string SoundCloud { get; set; }
         public string Instragram { get; set; }
         public string Facebook { get; set; }
+        public List<EventDJ> EventDJs { get; set; }
     }
 }

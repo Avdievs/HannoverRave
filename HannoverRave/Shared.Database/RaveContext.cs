@@ -11,18 +11,13 @@ namespace Shared.Database
     public class RaveContext : DbContext
     {
         public DbSet<Event> Events { get; set; }
-        //public DbSet<DJ> DJs { get; set; }
-        //public DbSet<Club> Clubs { get; set; }
-        //public DbSet<Location> Locations { get; private set; }
+        public DbSet<DJ> DJs { get; set; }
+        public DbSet<Club> Clubs { get; set; }
+        public DbSet<Location> Locations { get; private set; }
+        public DbSet<EventDJ> EventDJs { get; private set; }
 
         private string ConnectionString = "server=localhost;port=3306;database=HannoverRave;user=root;password=";
         public bool IsConnected { get; set; }
-
-        //public RaveContext() : base(options)
-        //{
-        //    var optionsBuilder = new DbContextOptionsBuilder<RaveContext>();
-        //    optionsBuilder.
-        //}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,12 +32,33 @@ namespace Shared.Database
             builder.Entity<Event>(entity =>
             {
                 entity.HasKey(e => e.EventId).HasName("EventId");
-                entity.Property<string>("Name").IsRequired();
-                entity.Ignore(e => e.Location);
+                entity.Property(e => e.Name).IsRequired();
+                entity.HasOne(e => e.Location).WithMany().HasForeignKey(p => p.LocationId);
 
-                //entity.Property(e => e.EventType).HasColumnName("EventType").IsRequired();
+            });
 
+            builder.Entity<Location>(entity =>
+            {
+                entity.HasKey(e => e.LocationId).HasName("LocationId");
+                entity.HasOne(e => e.Club).WithOne(p => p.Location).HasPrincipalKey<Club>(f => f.LocationId);
+            });
 
+            builder.Entity<Club>(entity =>
+            {
+                entity.HasKey(e => e.ClubId).HasName("ClubId");
+            });
+
+            builder.Entity<EventDJ>(entity =>
+            {
+                entity.HasKey(e => e.DJId).HasName("DJId");
+                entity.HasOne(e => e.DJ).WithMany(p => p.EventDJs).HasForeignKey(f => f.DJId);
+                entity.HasOne(e => e.Event).WithMany(p => p.EventDJs).HasForeignKey(f => f.EventId);
+            });
+
+            builder.Entity<DJ>(entity =>
+            {
+                entity.HasKey(e => e.DJId).HasName("DJId");
+                entity.Property(e => e.Name).IsRequired();
             });
         }
 
