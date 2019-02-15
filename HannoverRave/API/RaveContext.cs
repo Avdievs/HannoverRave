@@ -21,12 +21,13 @@ namespace Shared.Database
         private string ConnectionString = "server=localhost;port=3306;database=HannoverRave;user=root;password=";
         public bool IsConnected { get; set; }
 
+        public RaveContext(DbContextOptions options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLoggerFactory(DBLoggerFactory);
-
             if (!optionsBuilder.IsConfigured)
             {
+                optionsBuilder.UseLoggerFactory(DBLoggerFactory);
                 optionsBuilder.UseMySQL(ConnectionString);
             }
 
