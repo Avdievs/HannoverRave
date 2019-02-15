@@ -6,7 +6,7 @@ using Shared.Models;
 using System;
 using System.Data;
 
-namespace Shared.Database
+namespace API
 {
     public class RaveContext : DbContext
     {

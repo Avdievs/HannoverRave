@@ -5,52 +5,53 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API;
 using Shared.Models;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventsController : ControllerBase
+    public class DJsController : ControllerBase
     {
         private readonly RaveContext _context;
 
-        public EventsController(RaveContext context)
+        public DJsController(RaveContext context)
         {
             _context = context;
         }
 
-        // GET: api/Events
+        // GET: api/DJs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
+        public async Task<ActionResult<IEnumerable<DJ>>> GetDJs()
         {
-            return await _context.Events.ToListAsync();
+            return await _context.DJs.ToListAsync();
         }
 
-        // GET: api/Events/5
+        // GET: api/DJs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEvent(int id)
+        public async Task<ActionResult<DJ>> GetDJ(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
+            var dJ = await _context.DJs.FindAsync(id);
 
-            if (@event == null)
+            if (dJ == null)
             {
                 return NotFound();
             }
 
-            return @event;
+            return dJ;
         }
 
-        // PUT: api/Events/5
+        // PUT: api/DJs/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent(int id, Event @event)
+        public async Task<IActionResult> PutDJ(int id, DJ dJ)
         {
-            if (id != @event.EventId)
+            if (id != dJ.DJId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(@event).State = EntityState.Modified;
+            _context.Entry(dJ).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +59,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EventExists(id))
+                if (!DJExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +72,35 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/Events
+        // POST: api/DJs
         [HttpPost]
-        public async Task<ActionResult<Event>> PostEvent(Event @event)
+        public async Task<ActionResult<DJ>> PostDJ(DJ dJ)
         {
-            _context.Events.Add(@event);
+            _context.DJs.Add(dJ);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.EventId }, @event);
+            return CreatedAtAction("GetDJ", new { id = dJ.DJId }, dJ);
         }
 
-        // DELETE: api/Events/5
+        // DELETE: api/DJs/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Event>> DeleteEvent(int id)
+        public async Task<ActionResult<DJ>> DeleteDJ(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
-            if (@event == null)
+            var dJ = await _context.DJs.FindAsync(id);
+            if (dJ == null)
             {
                 return NotFound();
             }
 
-            _context.Events.Remove(@event);
+            _context.DJs.Remove(dJ);
             await _context.SaveChangesAsync();
 
-            return @event;
+            return dJ;
         }
 
-        private bool EventExists(int id)
+        private bool DJExists(int id)
         {
-            return _context.Events.Any(e => e.EventId == id);
+            return _context.DJs.Any(e => e.DJId == id);
         }
     }
 }

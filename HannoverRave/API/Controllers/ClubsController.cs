@@ -5,52 +5,53 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API;
 using Shared.Models;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventsController : ControllerBase
+    public class ClubsController : ControllerBase
     {
         private readonly RaveContext _context;
 
-        public EventsController(RaveContext context)
+        public ClubsController(RaveContext context)
         {
             _context = context;
         }
 
-        // GET: api/Events
+        // GET: api/Clubs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
+        public async Task<ActionResult<IEnumerable<Club>>> GetClubs()
         {
-            return await _context.Events.ToListAsync();
+            return await _context.Clubs.ToListAsync();
         }
 
-        // GET: api/Events/5
+        // GET: api/Clubs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEvent(int id)
+        public async Task<ActionResult<Club>> GetClub(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
+            var club = await _context.Clubs.FindAsync(id);
 
-            if (@event == null)
+            if (club == null)
             {
                 return NotFound();
             }
 
-            return @event;
+            return club;
         }
 
-        // PUT: api/Events/5
+        // PUT: api/Clubs/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent(int id, Event @event)
+        public async Task<IActionResult> PutClub(int id, Club club)
         {
-            if (id != @event.EventId)
+            if (id != club.ClubId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(@event).State = EntityState.Modified;
+            _context.Entry(club).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +59,7 @@ namespace API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EventExists(id))
+                if (!ClubExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +72,35 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/Events
+        // POST: api/Clubs
         [HttpPost]
-        public async Task<ActionResult<Event>> PostEvent(Event @event)
+        public async Task<ActionResult<Club>> PostClub(Club club)
         {
-            _context.Events.Add(@event);
+            _context.Clubs.Add(club);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.EventId }, @event);
+            return CreatedAtAction("GetClub", new { id = club.ClubId }, club);
         }
 
-        // DELETE: api/Events/5
+        // DELETE: api/Clubs/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Event>> DeleteEvent(int id)
+        public async Task<ActionResult<Club>> DeleteClub(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
-            if (@event == null)
+            var club = await _context.Clubs.FindAsync(id);
+            if (club == null)
             {
                 return NotFound();
             }
 
-            _context.Events.Remove(@event);
+            _context.Clubs.Remove(club);
             await _context.SaveChangesAsync();
 
-            return @event;
+            return club;
         }
 
-        private bool EventExists(int id)
+        private bool ClubExists(int id)
         {
-            return _context.Events.Any(e => e.EventId == id);
+            return _context.Clubs.Any(e => e.ClubId == id);
         }
     }
 }
