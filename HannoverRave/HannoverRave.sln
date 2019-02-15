@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HannoverRaveWebApp", "Hanno
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{A84D2B4B-6BF6-49A5-994E-4B5C5CCCF065}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Database", "Shared.Database\Shared.Database.csproj", "{249BA0D4-64BE-4057-BFDF-EE9EB5F96F02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Database", "Shared.Database\Shared.Database.csproj", "{249BA0D4-64BE-4057-BFDF-EE9EB5F96F02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{156E5A63-0C45-455D-9B90-C80C578A9225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{156E5A63-0C45-455D-9B90-C80C578A9225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Models", "Shared.Models\Shared.Models.csproj", "{E09E9A08-F578-495D-BA56-4880C803CFE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Models", "Shared.Models\Shared.Models.csproj", "{E09E9A08-F578-495D-BA56-4880C803CFE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
