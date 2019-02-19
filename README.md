@@ -1,9 +1,9 @@
 # HannoverRave
 This is my learn project about techno and goa events in Hannover.
-The main goal is to scrap informations about this kind events from social media platforms and messenger.
-This information will be posted on website automacly.
+The main goal is to scrap information about this events from social media platforms and messengers.
+Scraped data will be posted on website automatically.
 
-The web application will be deployet on Linux system.
+The web application will be deployed on Linux system.
 
 Frameworks:
 ASP.Net Core 2
